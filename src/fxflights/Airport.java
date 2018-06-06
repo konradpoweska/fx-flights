@@ -9,16 +9,16 @@ public class Airport {
 	ArrayList<Flight> departures;
 	ArrayList<Flight> arrivals;
 	
-	public Airport(City city, String name, String icaoId, Double latitude, Double longitude,
-			ArrayList<Flight> departures, ArrayList<Flight> arrivals) {
+	public Airport(City city, String name, String icaoId, Double latitude, Double longitude) {
 	
 		this.city = city;
 		this.name = name;
 		this.icaoId = icaoId;
 		this.latitude = latitude;
 		this.longitude = longitude;
-		this.departures = new ArrayList<Flight>;
-		this.arrivals = new ArrayList<Flight>;
+		this.departures = new ArrayList<Flight>();
+		this.arrivals = new ArrayList<Flight>();
+		
 	}
 
 	/**
@@ -68,6 +68,15 @@ public class Airport {
 	 */
 	public ArrayList<Flight> getArrivals() {
 		return arrivals;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Airport [city=" + city + ", name=" + name + ", icaoId=" + icaoId + ", latitude=" + latitude
+				+ ", longitude=" + longitude + ", departures=" + departures + ", arrivals=" + arrivals + "]";
 	}
 	
 	

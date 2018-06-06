@@ -6,10 +6,9 @@ public class Country {
 	String name;
 	HashMap<String, City> cities;
 	
-	public Country(String name, HashMap<String, City> cities) {
-		super();
+	public Country(String name) {
 		this.name = name;
-		this.cities = cities;
+		this.cities = new HashMap<String, City>();
 	}
 
 	/**
@@ -24,6 +23,14 @@ public class Country {
 	 */
 	public HashMap<String, City> getCities() {
 		return cities;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Country [name=" + name + ", cities=" + cities + "]";
 	}
 	
 	

@@ -1,6 +1,7 @@
 package fxflights;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import parsers.*;
 
@@ -49,6 +50,53 @@ public class FlightLive {
 		return flights;
 	}
 	
+	/**
+	 * Give the list of cities for a given country name
+	 * @param countryName
+	 * @return
+	 */
+	public Collection<City> getCitiesOfCountry(String countryName) {
+		Country theCountry = getCountries().get(countryName);
+		HashMap<String, City> cityList = theCountry.getCities();
+		return cityList.values();
 	
+	}
+	
+	/**
+	 * Give the list of airports for a given city name
+	 * @param cityName
+	 * @return
+	 */
+	public Collection<Airport> getAirportsOfCity(String cityName) {
+		City theCity = getCities().get(cityName);
+		HashMap<String, Airport> airportList = theCity.getAirports();
+		return airportList.values();
+	
+	}
+	
+	public void displayFlights(Collection<Flight> listOfFlight) {
+		for (Flight flight : listOfFlight) {
+			flight.displayFlight();
+		}
+	}
+	
+//	public void displayCitiesOfCountry(String countryName) {
+//		
+//		Country theCountry = getCountries().get(countryName);
+//		HashMap<String, City> cityList = theCountry.getCities();
+//		for(City city : cityList.values()) {
+//			city.displayCity();
+//		}
+//	}
+	
+	/**
+	 * Core of the application
+	 * @param args
+	 */
+	public static void main(String [] args)
+	{
+		FlightLive dataBase = new FlightLive();
+		
+	}
 	
 }

@@ -8,7 +8,6 @@ public class City {
 	HashMap<String, Airport> airports;
 	
 	public City(Country country, String name, HashMap<String, Airport> airports) {
-		super();
 		this.country = country;
 		this.name = name;
 		this.airports = airports;
@@ -33,6 +32,18 @@ public class City {
 	 */
 	public HashMap<String, Airport> getAirports() {
 		return airports;
+	}
+
+	public void displayCity() {
+		System.out.println(name + ", " + country + ".");
+	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "City [country=" + country + ", name=" + name + ", airports=" + airports + "]";
 	}
 	
 	
