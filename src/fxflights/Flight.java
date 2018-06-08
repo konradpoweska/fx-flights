@@ -3,17 +3,33 @@ package fxflights;
 import java.util.Date;
 
 public class Flight {
-	Airport from;
-	Airport to;
+	Airport from, to;
 	double latitude, longitude;
 	boolean flying;
 	String icaoFlight, aircraftMdl;
 	Date departure, arrival;
 	
 	
-	public Flight(Airport from, Airport to) {
+
+	/**
+	 * @param icaoFlight
+	 * @param from
+	 * @param to
+	 * @param latitude
+	 * @param longitude
+	 * @param flying
+	 * @param aircraftMdl
+	 */
+	public Flight(String icaoFlight, Airport from, Airport to, double latitude, double longitude, boolean flying,
+			String aircraftMdl) {
+		super();
+		this.icaoFlight = icaoFlight;
 		this.from = from;
 		this.to = to;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.flying = flying;
+		this.aircraftMdl = aircraftMdl;
 	}
 
 	/**
