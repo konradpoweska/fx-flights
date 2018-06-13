@@ -89,7 +89,7 @@ public class parserCSV {
 					Airport theNewAirport = new Airport(theNewCity, airportName, icaoAirport, latitude, longitude);
 					theNewCity.getAirports().put(airportName, theNewAirport);
 					cities.put(cityName, theNewCity);
-					airports.put(airportName, theNewAirport);
+					airports.put(icaoAirport, theNewAirport);
 					theNewCountry.getCities().put(cityName,theNewCity);
 				}
 					
@@ -102,14 +102,14 @@ public class parserCSV {
 					Airport theNewAirport = new Airport(theNewCity, airportName, icaoAirport, latitude, longitude);
 					theNewCity.getAirports().put(airportName, theNewAirport);
 					cities.put(cityName, theNewCity);
-					airports.put(airportName, theNewAirport);
+					airports.put(icaoAirport, theNewAirport);
 					theCountry.getCities().put(cityName,theNewCity);
 				}
 				else {
 					City theCity = cities.get(cityName);
 					Airport theNewAirport = new Airport(theCity, airportName, icaoAirport, latitude, longitude);
 					theCity.getAirports().put(airportName, theNewAirport);
-					airports.put(airportName, theNewAirport);
+					airports.put(icaoAirport, theNewAirport);
 				}
 			
 			}

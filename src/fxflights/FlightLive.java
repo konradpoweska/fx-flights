@@ -15,7 +15,7 @@ public class FlightLive {
 		
 		this.countries = new HashMap<String, Country>();
 		this.cities = new HashMap<String, City>();
-		this.airports = new HashMap<String, Airport>();
+		this.airports = new HashMap<String, Airport>(); //keys = icao of airports
 		parserCSV.parseAirportCSV(new File("airports.csv"), this.countries, this.cities, this.airports );
 		this.flights = new ArrayList<Flight>();
 		

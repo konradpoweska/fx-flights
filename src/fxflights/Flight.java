@@ -7,7 +7,7 @@ public class Flight {
 	Airport to;
 	double latitude, longitude;
 	boolean flying;
-	String icaoFlight, aircraftMdl;
+	String icaoFlight, aircraftMdl, company;
 	Date departure, arrival;
 	
 	
@@ -80,12 +80,27 @@ public class Flight {
 	}
 	
 	/**
+	 * @return the arrival
+	 */
+	public String getCompany() {
+		return company;
+	}
+	
+	/**
 	 * Method that display in console useful informations about a flight
 	 */
 	public void displayFlight() {
-		String flightInfo = icaoFlight + ", " + aircraftMdl + " from: " + from + " to: " + to + ". Currently at lat: " + latitude + ", long:" + longitude + ".";
-		System.out.println(flightInfo);
+		System.out.println(toString());
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return icaoFlight + ", " + company + " from: " + from + " to: " + to + ". Currently at lat: " + latitude + ", long:" + longitude + ".";
+	}
+	
 	
 	
 }
