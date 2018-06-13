@@ -1,15 +1,18 @@
-package fxflights;
+package fxflights.model;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import parsers.*;
+
+import fxflights.parsers.FlightRetriever;
+import fxflights.parsers.parserCSV;
 
 public class FlightLive {
 	HashMap<String, Country> countries;
 	HashMap<String, City> cities;
 	HashMap<String, Airport> airports;
 	ArrayList<Flight> flights;
+	FlightRetriever flightRetriever;
 	
 	public FlightLive() {
 		
@@ -17,8 +20,9 @@ public class FlightLive {
 		this.cities = new HashMap<String, City>();
 		this.airports = new HashMap<String, Airport>(); //keys = icao of airports
 		parserCSV.parseAirportCSV(new File("airports.csv"), this.countries, this.cities, this.airports );
-		this.flights = new ArrayList<Flight>();
-		
+//		this.flights = new ArrayList<Flight>();
+		flightRetriever = new FlightRetriever(airports);
+		flightRetriever.fetchFlights();
 		
 	}
 
@@ -96,7 +100,6 @@ public class FlightLive {
 	public static void main(String [] args)
 	{
 		FlightLive dataBase = new FlightLive();
-		
 	}
 	
 }

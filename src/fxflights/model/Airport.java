@@ -1,4 +1,4 @@
-package fxflights;
+package fxflights.model;
 
 import java.util.ArrayList;
 

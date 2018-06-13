@@ -1,12 +1,13 @@
-package parsers;
+package fxflights.parsers;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Scanner;
 
-
-import fxflights.*;
+import fxflights.model.Airport;
+import fxflights.model.City;
+import fxflights.model.Country;
 
 public class parserCSV {
 

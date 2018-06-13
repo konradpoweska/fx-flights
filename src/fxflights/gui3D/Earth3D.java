@@ -1,4 +1,4 @@
-package gui3D;
+package fxflights.gui3D;
 
 import java.net.URL;
 

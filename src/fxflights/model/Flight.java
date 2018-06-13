@@ -1,4 +1,4 @@
-package fxflights;
+package fxflights.model;
 
 import java.util.Date;
 
@@ -20,10 +20,10 @@ public class Flight {
 	 * @param flying
 	 * @param aircraftMdl
 	 */
-	public Flight(String icaoFlight, Airport from, Airport to, double latitude, double longitude, boolean flying,
+	public Flight(String icaoFlight, String company, Airport from, Airport to, double latitude, double longitude, boolean flying,
 			String aircraftMdl) {
-		super();
 		this.icaoFlight = icaoFlight;
+		this.company = company;
 		this.from = from;
 		this.to = to;
 		this.latitude = latitude;
@@ -70,7 +70,7 @@ public class Flight {
 	/**
 	 * @return the icaoFlight
 	 */
-	public String getIcaoFlight() {
+	public String getIcao() {
 		return icaoFlight;
 	}
 

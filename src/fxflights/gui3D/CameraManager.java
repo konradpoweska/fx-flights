@@ -1,4 +1,4 @@
-package gui3D;
+package fxflights.gui3D;
 
 import javafx.event.EventHandler;
 import javafx.scene.*;
