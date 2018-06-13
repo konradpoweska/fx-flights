@@ -87,7 +87,7 @@ public class parserCSV {
 					HashMap<String, Airport> airportsOfCity = new HashMap<String, Airport>();
 					City theNewCity = new City(theNewCountry, cityName, airportsOfCity);
 					Airport theNewAirport = new Airport(theNewCity, airportName, icaoAirport, latitude, longitude);
-					theNewCity.getAirports().put(airportName, theNewAirport);
+					theNewCity.getAirports().put(icaoAirport, theNewAirport);
 					cities.put(cityName, theNewCity);
 					airports.put(icaoAirport, theNewAirport);
 					theNewCountry.getCities().put(cityName,theNewCity);
@@ -100,7 +100,7 @@ public class parserCSV {
 					HashMap<String, Airport> airportsOfCity = new HashMap<String, Airport>();
 					City theNewCity = new City(theCountry, cityName, airportsOfCity);
 					Airport theNewAirport = new Airport(theNewCity, airportName, icaoAirport, latitude, longitude);
-					theNewCity.getAirports().put(airportName, theNewAirport);
+					theNewCity.getAirports().put(icaoAirport, theNewAirport);
 					cities.put(cityName, theNewCity);
 					airports.put(icaoAirport, theNewAirport);
 					theCountry.getCities().put(cityName,theNewCity);
@@ -108,7 +108,7 @@ public class parserCSV {
 				else {
 					City theCity = cities.get(cityName);
 					Airport theNewAirport = new Airport(theCity, airportName, icaoAirport, latitude, longitude);
-					theCity.getAirports().put(airportName, theNewAirport);
+					theCity.getAirports().put(icaoAirport, theNewAirport);
 					airports.put(icaoAirport, theNewAirport);
 				}
 			
