@@ -99,7 +99,8 @@ public class FlightLive {
 	 */
 	public static void main(String [] args)
 	{
-		FlightLive dataBase = new FlightLive();
+		
+		
 	}
 	
 }

@@ -11,7 +11,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("mainWindow.fxml"));
-        primaryStage.setTitle("Grahpical editor");
+        primaryStage.setTitle("Flight Live");
         primaryStage.setScene(new Scene(root, 860, 600));
         primaryStage.show();
     }
