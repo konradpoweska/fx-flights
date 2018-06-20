@@ -10,10 +10,16 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("mainWindow.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("mainWindow.fxml"));
+        Parent root = loader.load();
+
+        Controller controller = loader.getController();
+        controller.bindPrimaryStage(primaryStage);
+
         primaryStage.setTitle("Flight Live");
         primaryStage.setScene(new Scene(root, 860, 600));
         primaryStage.show();
+
     }
 
 

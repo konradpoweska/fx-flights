@@ -12,10 +12,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 
 public class Controller implements Initializable {
-
+    Stage primaryStage;
 	@FXML Pane pane3D;
 	@FXML ChoiceBox fromChoiceBox;
 	@FXML ChoiceBox toChoiceBox;
@@ -33,8 +34,11 @@ public class Controller implements Initializable {
     	for (Airport airport : dataBase.getAirports().values()) {
     		earth3D.displayAirport(airport.getName(), airport.getLatitude(), airport.getLongitude(), false );
     	}
-    	
-       
 
+
+    }
+
+    void bindPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
     }
 }
