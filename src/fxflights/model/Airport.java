@@ -2,7 +2,7 @@ package fxflights.model;
 
 import java.util.ArrayList;
 
-public class Airport {
+public class Airport implements Place {
 	City city;
 	String name, icaoId;
 	Double latitude, longitude;
