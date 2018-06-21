@@ -96,16 +96,8 @@ public class FlightLive implements FlightsListener {
 
 
 
-	public void onFlightsUpdate(List<Flight> flights, Earth3D root) {
+	public void onFlightsUpdate(List<Flight> flights) {
 		this.flights = flights;
-		System.out.println("Nombre de vols : " + flights.size());
-		displayFlights(flights); // To display it in console
-		root.displayFlightList(flights);
-
-//		for (Flight flight : flights) {
-//			Aircraft testAircraft = new Aircraft(Color.GREEN);
-//			testAircraft.displayAircraft(flight, earth3D.getRoot3D());
-//		}
 		
 	}
 }
