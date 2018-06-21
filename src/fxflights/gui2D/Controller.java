@@ -20,6 +20,7 @@ import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
@@ -50,6 +51,9 @@ public class Controller implements Initializable, FlightsListener {
 			 @Override
 	    	public void handle(MouseEvent event) {
 				 Flight selectedfFlight = flightsList.getSelectionModel().getSelectedItem();
+//				 for (Node node : earth3D.getPlanesGroup().getChildren()) {
+//					 if(node) 
+//				 } // Can't link the flight / aircraft to the plane node 
 				 
 	    	}
 	 });

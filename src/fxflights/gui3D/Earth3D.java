@@ -32,7 +32,10 @@ public class Earth3D{
     private static final double TEXTURE_LON_OFFSET = 2.8f;
     private Group root3D;
     private Group planesGroup;
+    private Double airportScale = 0.005;
     private Color aircraftColor = Color.RED;
+    private Color departureColor = Color.BLUE;
+    private Color arrivalColor = Color.GREEN;
 
 
     public Earth3D(Pane parent) {
@@ -109,15 +112,20 @@ public class Earth3D{
     //Display airports from a list
     public void displayAirportList(Collection<Airport> airportList, Color color) {
     	for (Airport airport : airportList) {
-    		displayAirport(airport.getName(), airport.getLatitude(), airport.getLongitude(), color);
+    		displayAirport(airport, color);
     	}
     }
     
     //Display Airport method
-    public void displayAirport(String name, double latitude, double longitude, Color color) {
-    	Group airport = new Group();
+    public void displayAirport(Airport airport, Color color) {
+    	
+    	String name = airport.getName();
+    	Double latitude = airport.getLatitude();
+    	Double longitude = airport.getLongitude();
+    	
+    	Group airportGroup = new Group();
     	Point3D point = geoCoordTo3dCoord(latitude, longitude);
-    	Sphere sphere = new Sphere(0.0025);
+    	Sphere sphere = new Sphere(airportScale);
     	
     	//Create material
     	final PhongMaterial material = new PhongMaterial();
@@ -131,27 +139,34 @@ public class Earth3D{
     	sphere.setMaterial(material);
     	
     	//add the sphere to the airport group
-    	airport.getChildren().add(sphere);
-    	airport.setId(name);
+    	airportGroup.getChildren().add(sphere);
+    	airportGroup.setId(name);
     	
     	//translate city to the right place
-    	airport.setTranslateX(point.getX());
-    	airport.setTranslateY(point.getY());
-    	airport.setTranslateZ(point.getZ());
-    	root3D.getChildren().add(airport);
+    	airportGroup.setTranslateX(point.getX());
+    	airportGroup.setTranslateY(point.getY());
+    	airportGroup.setTranslateZ(point.getZ());
+//    	System.out.println("BEFORE ADDING GROUP TO ROOT3D");
+    	root3D.getChildren().add(airportGroup);
     }
 
-    //Display list of flights method
+    //Display list of flights method 
     public void displayFlightList(List<Flight> flights) {
     	for (Flight flight : flights) {
+    		if (flight.getFrom()!= null) {
+    			displayAirport(flight.getFrom(), departureColor );
+    		}
+    		if (flight.getTo() != null) {
+    			displayAirport(flight.getTo(), arrivalColor );
+    		}
     		displayFlight(flight);
     	}
     }
     
     //Display a flight method
     public void displayFlight(Flight flight) {
-    	Aircraft aircraft = new Aircraft(this.aircraftColor);
-    	aircraft.displayAircraft(flight, this.planesGroup);
+    	Aircraft aircraft = new Aircraft(flight, this.aircraftColor);
+    	aircraft.displayAircraft(this.planesGroup);
     }
     
     
@@ -197,6 +212,12 @@ public class Earth3D{
 	}
 
 
+	/**
+	 * @return the planesGroup
+	 */
+	public Group getPlanesGroup() {
+		return planesGroup;
+	}
 	/**
 	 * @return the root3D
 	 */
