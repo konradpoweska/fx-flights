@@ -36,7 +36,7 @@ class ParsedFlight {
 	public String Op;
 	public String Mdl;
 	public String Type;
-	public float Ang;
+	public float Trak;
 
 
 	public Flight toFlight(HashMap<String, Airport> airports) {
@@ -46,7 +46,7 @@ class ParsedFlight {
 
 		// if(from==null || to==null) throw new AirportNotRecognized();
 
-		return new Flight(Icao, Op, from, to, Lat, Long, Gnd, Mdl, Ang);
+		return new Flight(Icao, Op, from, to, Lat, Long, Gnd, Mdl, Trak);
 	}
 }
 
