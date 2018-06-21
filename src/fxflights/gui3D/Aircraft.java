@@ -1,6 +1,7 @@
 package fxflights.gui3D;
 
 import java.net.URL;
+import java.util.List;
 
 import com.interactivemesh.jfx.importer.ImportException;
 import com.interactivemesh.jfx.importer.obj.ObjModelImporter;
@@ -58,7 +59,7 @@ public class Aircraft {
 //		Fx3DGroup.planeScale.set3DScale(2*scale);
 //	}
 	
-	public void displayAircraft(Flight flight, Group earthGroup) {
+	public void displayAircraft(Flight flight, Group planesGroup) {
 		
 		double latitude = flight.getLatitude();
 		double longitude = flight.getLongitude();
@@ -88,6 +89,8 @@ public class Aircraft {
 		    	}
 		 });
 		
-		earthGroup.getChildren().addAll(plane);
+		planesGroup.getChildren().addAll(plane);
 	}
+	
+	
 }

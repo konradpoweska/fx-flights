@@ -51,13 +51,13 @@ public class Controller implements Initializable, FlightsListener {
     	
 //    	dataBase.displayFlights(dataBase.getFlights());
     	
-    	Flight testFlight = new Flight("394A0D", "Air France", dataBase.getAirports().get("AYGA"), dataBase.getAirports().get("BIHN"), 148.7532958984375, 0.8450319766998291, true, "Avion de test", 45.0);
-    	Flight testFlightBis = new Flight("364A0D", "Air France", dataBase.getAirports().get("AYGA"), dataBase.getAirports().get("BIHN"), 48.7532958984375, 1.8450319766998291, true, "Avion de testBis", 85.0);
-    	
-    	ArrayList<Flight> testList = new ArrayList<Flight>();; 
-    	testList.add(testFlight);
-    	testList.add(testFlightBis);
-    	earth3D.displayFlightList(testList);
+//    	Flight testFlight = new Flight("394A0D", "Air France", dataBase.getAirports().get("AYGA"), dataBase.getAirports().get("BIHN"), 148.7532958984375, 0.8450319766998291, true, "Avion de test", 45.0);
+//    	Flight testFlightBis = new Flight("364A0D", "Air France", dataBase.getAirports().get("AYGA"), dataBase.getAirports().get("BIHN"), 48.7532958984375, 1.8450319766998291, true, "Avion de testBis", 85.0);
+//    	
+//    	ArrayList<Flight> testList = new ArrayList<Flight>();; 
+//    	testList.add(testFlight);
+//    	testList.add(testFlightBis);
+//    	earth3D.displayFlightList(testList);
     	
     	
 //    	Aircraft testAircraft = new Aircraft(Color.GREEN);
@@ -80,7 +80,7 @@ public class Controller implements Initializable, FlightsListener {
 		searchButton.setDisable(false);
 		System.out.println("Nombre de vols : " + flights.size());
 		dataBase.displayFlights(flights); // To display it in console
-		
+
 		Task<Void> task = new Task<Void>() {
 
 			@Override protected Void call() throws Exception {
@@ -88,6 +88,7 @@ public class Controller implements Initializable, FlightsListener {
 				Platform.runLater(new Runnable() {
 					@Override public void run() {
 						System.out.println("DEBUT DISPLAY 3D");
+						earth3D.resetPlanesGroup();
 						earth3D.displayFlightList(flights);
 						
 						ObservableList<String> content = FXCollections.observableArrayList();
