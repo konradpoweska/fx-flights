@@ -1,29 +1,29 @@
 package fxflights.model;
+import fxflights.parsers.FlightsListener;
+import fxflights.parsers.FlightRetriever;
+import fxflights.parsers.parserCSV;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-
-import fxflights.parsers.FlightRetriever;
-import fxflights.parsers.FlightsListener;
-import fxflights.parsers.parserCSV;
+import java.util.List;
 
 public class FlightLive implements FlightsListener {
 	HashMap<String, Country> countries;
 	HashMap<String, City> cities;
 	HashMap<String, Airport> airports;
-	ArrayList<Flight> flights;
-	FlightRetriever flightRetriever;
+	List<Flight> flights;
+	public final FlightRetriever flightRetriever;
 	
 	public FlightLive() {
-		
+
 		this.countries = new HashMap<String, Country>();
 		this.cities = new HashMap<String, City>();
 		this.airports = new HashMap<String, Airport>(); //keys = icao of airports
 		parserCSV.parseAirportCSV(new File("airports.csv"), this.countries, this.cities, this.airports );
 		flightRetriever = new FlightRetriever(airports);
-		flightRetriever.fetchFlights();
-		
+		flightRetriever.addFlightListener(this);
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class FlightLive implements FlightsListener {
 	/**
 	 * @return the flights
 	 */
-	public ArrayList<Flight> getFlights() {
+	public List<Flight> getFlights() {
 		return flights;
 	}
 	
@@ -63,7 +63,6 @@ public class FlightLive implements FlightsListener {
 		Country theCountry = getCountries().get(countryName);
 		HashMap<String, City> cityList = theCountry.getCities();
 		return cityList.values();
-	
 	}
 	
 	/**
@@ -75,7 +74,6 @@ public class FlightLive implements FlightsListener {
 		City theCity = getCities().get(cityName);
 		HashMap<String, Airport> airportList = theCity.getAirports();
 		return airportList.values();
-	
 	}
 	
 	public void displayFlights(Collection<Flight> listOfFlight) {
@@ -95,7 +93,7 @@ public class FlightLive implements FlightsListener {
 
 
 
-	public void onFlightsUpdate(ArrayList<Flight> flights) {
+	public void onFlightsUpdate(List<Flight> flights) {
 		this.flights = flights;
 	}
 }

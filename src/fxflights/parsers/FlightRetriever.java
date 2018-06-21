@@ -1,26 +1,20 @@
 package fxflights.parsers;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import fxflights.model.Airport;
+import fxflights.model.City;
+import fxflights.model.Country;
+import fxflights.model.Flight;
+import org.asynchttpclient.*;
+
+import java.io.File;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import org.asynchttpclient.AsyncCompletionHandler;
-import org.asynchttpclient.AsyncHttpClient;
-import org.asynchttpclient.BoundRequestBuilder;
-import org.asynchttpclient.DefaultAsyncHttpClientConfig;
-import org.asynchttpclient.Dsl;
-import org.asynchttpclient.Response;
-
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import fxflights.model.Airport;
-import fxflights.model.Flight;
-
 // INTERMEDIATE CLASSES for json deserializing
+
 
 class FlightList {
 	public ParsedFlight[] acList; //List of planes
@@ -29,6 +23,8 @@ class FlightList {
 
 
 class ParsedFlight {
+    static Iterator<Airport> airportIterator = null;
+
 	public String Icao;
 	public String From;
 	public String To;
@@ -41,10 +37,20 @@ class ParsedFlight {
 	public String Mdl;
 	public String Type;
 	public float Ang;
-	
+
+
 	public Flight toFlight(HashMap<String, Airport> airports) {
 //		Airport from = airports.get(this.From.split(" ")[0]);
 //		Airport to = airports.get(this.To.split(" ")[0]);
+        Airport from, to;
+        if(airportIterator == null || !airportIterator.hasNext())
+            airportIterator = airports.values().iterator();
+        from = airportIterator.next();
+
+        if(!airportIterator.hasNext())
+            airportIterator = airports.values().iterator();
+        to = airportIterator.next();
+
 		return new Flight(Icao, Op, null, null, Lat, Long, Gnd, Mdl, 0.0);
 	}
 }
@@ -61,13 +67,15 @@ public class FlightRetriever {
 	AsyncHttpClient client;
 	HashMap<String, Airport> airports;
 	FlightList parsingResults;
-	Map<String,Flight> flights;
-	
+	List<Flight> flights;
+	Object from, to;
+	ArrayList<FlightsListener> flightsListeners;
 	
 	
 	public FlightRetriever(HashMap<String, Airport> airports) {
 		this.airports = airports;
-		
+		this.flightsListeners = new ArrayList<>();
+
 		DefaultAsyncHttpClientConfig.Builder clientBuilder = Dsl.config()
 				  .setConnectTimeout(500)
 				  .setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36")
@@ -75,12 +83,26 @@ public class FlightRetriever {
 		client = Dsl.asyncHttpClient(clientBuilder);
 		Logger.getLogger("io.netty").setLevel(Level.WARNING);
 	}
+
+	public boolean addFlightListener(FlightsListener fl) {
+		return flightsListeners.add(fl);
+	}
+	public boolean removeFlightListener(FlightsListener fl) {
+		return flightsListeners.remove(fl);
+	}
 	
-	
-	
-	
+	public void setFromTo(Object from, Object to) {
+		this.from = from;
+		this.to = to;
+	}
+
+
+
+
 	String generateURL() {
-		return "https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json?fOpQ=Air%20France";
+		StringBuilder result = new StringBuilder("https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json");
+		result.append("?fOpQ=Air%20France");
+		return result.toString();
 	}
 	
 	
@@ -96,15 +118,15 @@ public class FlightRetriever {
 	
 	public void fetchFlights() {
 		fetchJSON(generateURL(), new AsyncCompletionHandler<Object>() {
-		    @Override
-		    public Object onCompleted(Response response) throws Exception {
-		    	String json = response.getResponseBody();
-		    	ObjectMapper mapper = new ObjectMapper();
-		    	mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-		    	parsingResults = mapper.readValue(json, FlightList.class);
-		    	updateFlights();
-		    	return flights;
-		    }
+			@Override
+			public Object onCompleted(Response response) throws Exception {
+				String json = response.getResponseBody();
+				ObjectMapper mapper = new ObjectMapper();
+				mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+				parsingResults = mapper.readValue(json, FlightList.class);
+				updateFlights();
+				return parsingResults;
+			}
 		});
 	}
 	
@@ -113,8 +135,20 @@ public class FlightRetriever {
 	void updateFlights() {
 		flights = Arrays.asList(parsingResults.acList).stream()
 			.map(e->e.toFlight(airports))
-			.collect(Collectors.toMap(Flight::getIcao, x->x));
-		Iterator<String> i = flights.keySet().iterator();
-		flights.get(i.next()).displayFlight();
+			.collect(Collectors.toList());
+		for(FlightsListener listener : flightsListeners) {
+			listener.onFlightsUpdate(flights);
+		}
+	}
+
+
+	static public void main(String[] args) {
+		HashMap<String, Country> countries = new HashMap<String, Country>();
+		HashMap<String, City> cities = new HashMap<String, City>();
+		HashMap<String, Airport> airports = new HashMap<String, Airport>(); //keys = icao of airports
+		parserCSV.parseAirportCSV(new File("airports.csv"), countries, cities, airports);
+		FlightRetriever flightRetriever = new FlightRetriever(airports);
+//		flightRetriever.fetchFlights();
+
 	}
 }
