@@ -75,8 +75,7 @@ public class Airport implements Place {
 	 */
 	@Override
 	public String toString() {
-		return "Airport [city=" + city + ", name=" + name + ", icaoId=" + icaoId + ", latitude=" + latitude
-				+ ", longitude=" + longitude + ", departures=" + departures + ", arrivals=" + arrivals + "]";
+		return name;
 	}
 	
 	

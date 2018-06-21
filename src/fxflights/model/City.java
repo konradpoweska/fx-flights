@@ -43,7 +43,7 @@ public class City implements Place {
 	 */
 	@Override
 	public String toString() {
-		return "City [country=" + country + ", name=" + name + ", airports=" + airports + "]";
+		return name;
 	}
 	
 	

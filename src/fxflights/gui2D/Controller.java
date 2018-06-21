@@ -43,6 +43,10 @@ public class Controller implements Initializable, FlightsListener {
     	//Display every airports
     	earth3D.displayAirportList(dataBase.getAirports().values(), Color.YELLOW);
     	
+//    	System.out.println("Nombre de vols : " + dataBase.flightRetriever.acList.size());
+    	
+//    	dataBase.displayFlights(dataBase.getFlights());
+    	
     	Flight testFlight = new Flight("394A0D", "Air France", dataBase.getAirports().get("AYGA"), dataBase.getAirports().get("BIHN"), 148.7532958984375, 0.8450319766998291, true, "Avion de test", 45.0);
     	Flight testFlightBis = new Flight("364A0D", "Air France", dataBase.getAirports().get("AYGA"), dataBase.getAirports().get("BIHN"), 48.7532958984375, 1.8450319766998291, true, "Avion de testBis", 85.0);
     	Aircraft testAircraft = new Aircraft(Color.GREEN);

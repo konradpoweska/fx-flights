@@ -30,7 +30,7 @@ public class Country implements Place {
 	 */
 	@Override
 	public String toString() {
-		return "Country [name=" + name + ", cities=" + cities + "]";
+		return name;
 	}
 	
 	

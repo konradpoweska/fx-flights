@@ -2,11 +2,13 @@ package fxflights.gui3D;
 
 import java.net.URL;
 import java.util.Collection;
+import java.util.List;
 
 import com.interactivemesh.jfx.importer.ImportException;
 import com.interactivemesh.jfx.importer.obj.ObjModelImporter;
 
 import fxflights.model.Airport;
+import fxflights.model.Flight;
 import javafx.geometry.Point3D;
 import javafx.scene.AmbientLight;
 import javafx.scene.Group;
@@ -133,10 +135,12 @@ public class Earth3D{
     	root3D.getChildren().add(airport);
     }
 
-    //Display Flight method
-    public void displayFlight() {
-    	
-    }
+//    //Display Flight method
+//    public void displayFlightList(List<Flight> flights) {
+//    	for (Flight flight : flights) {
+//    		displayFlight;
+//    	}
+//    }
     
     
     // From Rahel Lüthy : https://netzwerg.ch/blog/2015/03/22/javafx-3d-line/
