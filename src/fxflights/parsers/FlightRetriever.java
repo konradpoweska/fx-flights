@@ -23,7 +23,6 @@ class FlightList {
 
 
 class ParsedFlight {
-    static Iterator<Airport> airportIterator = null;
 
 	public String Icao;
 	public String From;
@@ -40,18 +39,12 @@ class ParsedFlight {
 
 
 	public Flight toFlight(HashMap<String, Airport> airports) {
-//		Airport from = airports.get(this.From.split(" ")[0]);
-//		Airport to = airports.get(this.To.split(" ")[0]);
-        Airport from, to;
-        if(airportIterator == null || !airportIterator.hasNext())
-            airportIterator = airports.values().iterator();
-        from = airportIterator.next();
 
-        if(!airportIterator.hasNext())
-            airportIterator = airports.values().iterator();
-        to = airportIterator.next();
+	    Airport from = airports.get(this.From.split(" ")[0]);
+		Airport to   = airports.get(this.To  .split(" ")[0]);
+		// if(from==null || to==null) throw new AirportNotRecognized();
 
-		return new Flight(Icao, Op, null, null, Lat, Long, Gnd, Mdl, 0.0);
+		return new Flight(Icao, Op, from, to, Lat, Long, Gnd, Mdl, Ang);
 	}
 }
 
@@ -133,22 +126,15 @@ public class FlightRetriever {
 
 	
 	void updateFlights() {
-		flights = Arrays.asList(parsingResults.acList).stream()
-			.map(e->e.toFlight(airports))
-			.collect(Collectors.toList());
+
+        flights = Arrays.asList(parsingResults.acList).stream()
+                .filter(pf->(pf.From != null && pf.To != null))
+                .map(e->e.toFlight(airports))
+                .collect(Collectors.toList());
+
 		for(FlightsListener listener : flightsListeners) {
 			listener.onFlightsUpdate(flights);
 		}
 	}
 
-
-	static public void main(String[] args) {
-		HashMap<String, Country> countries = new HashMap<String, Country>();
-		HashMap<String, City> cities = new HashMap<String, City>();
-		HashMap<String, Airport> airports = new HashMap<String, Airport>(); //keys = icao of airports
-		parserCSV.parseAirportCSV(new File("airports.csv"), countries, cities, airports);
-		FlightRetriever flightRetriever = new FlightRetriever(airports);
-//		flightRetriever.fetchFlights();
-
-	}
 }

@@ -22,7 +22,7 @@ public class Flight {
 	 * @param angle
 	 */
 	public Flight(String icaoFlight, String company, Airport from, Airport to, double latitude, double longitude, boolean flying,
-			String aircraftMdl, Double angle) {
+			String aircraftMdl, double angle) {
 		this.icaoFlight = icaoFlight;
 		this.company = company;
 		this.from = from;
