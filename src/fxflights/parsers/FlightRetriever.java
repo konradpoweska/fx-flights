@@ -5,6 +5,7 @@ import fxflights.model.Airport;
 import fxflights.model.City;
 import fxflights.model.Country;
 import fxflights.model.Flight;
+import javafx.application.Platform;
 import org.asynchttpclient.*;
 
 import java.io.File;
@@ -42,6 +43,7 @@ class ParsedFlight {
 
 	    Airport from = airports.get(this.From.split(" ")[0]);
 		Airport to   = airports.get(this.To  .split(" ")[0]);
+
 		// if(from==null || to==null) throw new AirportNotRecognized();
 
 		return new Flight(Icao, Op, from, to, Lat, Long, Gnd, Mdl, Ang);
@@ -133,7 +135,7 @@ public class FlightRetriever {
                 .collect(Collectors.toList());
 
 		for(FlightsListener listener : flightsListeners) {
-			listener.onFlightsUpdate(flights);
+            Platform.runLater(()->{listener.onFlightsUpdate(flights);});
 		}
 	}
 
