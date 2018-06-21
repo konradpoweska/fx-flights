@@ -134,7 +134,6 @@ public class Flight {
 		content.add("Icao : " + icaoFlight);
 		content.add("Company : " + company);
 		content.add("Model : " + aircraftMdl);
-		content.add("Is flying : " + flying);
 		content.add("From : " + from);
 		content.add("To : " + to);
 		content.add("Latitude : " + latitude);

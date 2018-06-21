@@ -32,7 +32,7 @@ public class Earth3D{
     private static final double TEXTURE_LON_OFFSET = 2.8f;
     private Group root3D;
     private Group planesGroup;
-    private Double airportScale = 0.005;
+    private Double airportScale = 0.01;
     private Color aircraftColor = Color.RED;
     private Color departureColor = Color.BLUE;
     private Color arrivalColor = Color.GREEN;

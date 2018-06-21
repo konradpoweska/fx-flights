@@ -122,7 +122,7 @@ public class Controller implements Initializable, FlightsListener {
 		dataBase.displayFlights(flights); // To display it in console
 
 
-		System.out.println("DEBUT DISPLAY 3D");
+//		System.out.println("DEBUT DISPLAY 3D");
 		earth3D.resetPlanesGroup();
 		earth3D.displayFlightList(flights);
 
