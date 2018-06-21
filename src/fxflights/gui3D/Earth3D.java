@@ -12,6 +12,7 @@ import fxflights.model.Flight;
 import javafx.geometry.Point3D;
 import javafx.scene.AmbientLight;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.PointLight;
 import javafx.scene.SceneAntialiasing;
@@ -30,6 +31,7 @@ public class Earth3D{
     private static final double TEXTURE_LAT_OFFSET = -0.2f;
     private static final double TEXTURE_LON_OFFSET = 2.8f;
     private Group root3D;
+    private Group planesGroup;
     private Color aircraftColor = Color.RED;
 
 
@@ -37,6 +39,8 @@ public class Earth3D{
 
         //Create a Pane et graph scene root for the 3D content
         root3D = new Group();
+        planesGroup = new Group();
+        root3D.getChildren().add(planesGroup);
 
         // Load geometry
         ObjModelImporter objImporter = new ObjModelImporter();
@@ -147,7 +151,7 @@ public class Earth3D{
     //Display a flight method
     public void displayFlight(Flight flight) {
     	Aircraft aircraft = new Aircraft(this.aircraftColor);
-    	aircraft.displayAircraft(flight, this.root3D);
+    	aircraft.displayAircraft(flight, this.planesGroup);
     }
     
     
@@ -187,6 +191,10 @@ public class Earth3D{
                 java.lang.Math.cos(java.lang.Math.toRadians(lon_cor))
                         * java.lang.Math.cos(java.lang.Math.toRadians(lat_cor)));
     }
+    
+    public void resetPlanesGroup() {
+		this.planesGroup.getChildren().clear();
+	}
 
 
 	/**
