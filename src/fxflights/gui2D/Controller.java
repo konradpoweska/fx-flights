@@ -14,6 +14,8 @@ import fxflights.model.Airport;
 import fxflights.model.Flight;
 import fxflights.model.FlightLive;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -87,6 +89,13 @@ public class Controller implements Initializable, FlightsListener {
 					@Override public void run() {
 						System.out.println("DEBUT DISPLAY 3D");
 						earth3D.displayFlightList(flights);
+						
+						ObservableList<String> content = FXCollections.observableArrayList();
+						for (Flight flight : flights) {
+							content.add(flight.toString());
+						}
+						flightsList.setItems(content);
+
 					}
 				});
 				return null;
