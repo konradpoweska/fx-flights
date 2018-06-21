@@ -16,10 +16,11 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 
 public class Controller implements Initializable {
-
+    Stage primaryStage;
 	@FXML Pane pane3D;
 	@FXML ChoiceBox<String> fromChoiceBox;
 	@FXML ChoiceBox<String> toChoiceBox;
@@ -42,6 +43,9 @@ public class Controller implements Initializable {
     	Aircraft testAircraftBis = new Aircraft(Color.RED);
     	testAircraft.displayAircraft(testFlight, earth3D.getRoot3D());
     	testAircraftBis.displayAircraft(testFlightBis, earth3D.getRoot3D());
+    }
 
+    void bindPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
     }
 }

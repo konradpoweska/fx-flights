@@ -5,9 +5,10 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import fxflights.parsers.FlightRetriever;
+import fxflights.parsers.FlightsListener;
 import fxflights.parsers.parserCSV;
 
-public class FlightLive {
+public class FlightLive implements FlightsListener {
 	HashMap<String, Country> countries;
 	HashMap<String, City> cities;
 	HashMap<String, Airport> airports;
@@ -20,7 +21,6 @@ public class FlightLive {
 		this.cities = new HashMap<String, City>();
 		this.airports = new HashMap<String, Airport>(); //keys = icao of airports
 		parserCSV.parseAirportCSV(new File("airports.csv"), this.countries, this.cities, this.airports );
-//		this.flights = new ArrayList<Flight>();
 		flightRetriever = new FlightRetriever(airports);
 		flightRetriever.fetchFlights();
 		
@@ -92,15 +92,10 @@ public class FlightLive {
 //			city.displayCity();
 //		}
 //	}
-	
-	/**
-	 * Core of the application
-	 * @param args
-	 */
-	public static void main(String [] args)
-	{
-		
-		
+
+
+
+	public void onFlightsUpdate(ArrayList<Flight> flights) {
+		this.flights = flights;
 	}
-	
 }

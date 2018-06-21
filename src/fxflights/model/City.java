@@ -2,7 +2,7 @@ package fxflights.model;
 
 import java.util.HashMap;
 
-public class City {
+public class City implements Place {
 	Country country;
 	String name;
 	HashMap<String, Airport> airports;

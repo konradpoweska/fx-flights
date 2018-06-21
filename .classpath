@@ -67,5 +67,6 @@
 	<classpathentry kind="lib" path="lib/Jackson/jackson-annotations-2.9.5.jar"/>
 	<classpathentry kind="lib" path="lib/Jackson/jackson-core-2.9.5.jar"/>
 	<classpathentry kind="lib" path="lib/Jackson/jackson-databind-2.9.5.jar"/>
+	<classpathentry kind="lib" path="lib/jimObjModelImporterJFX.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
