@@ -123,7 +123,7 @@ public class Flight {
 	 */
 	@Override
 	public String toString() {
-		return icaoFlight + ", " + company + " from: " + from + " to: " + to + ". Currently at lat: " + latitude + ", long:" + longitude + ".";
+		return icaoFlight + ", " + company + " from: " + from + " to: " + to + ". Currently at lat: " + latitude + ", long:" + longitude + " at angle : " + angle + " .";
 	}
 	
 	
