@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Flight {
 	Airport from, to;
-	double latitude, longitude;
+	double latitude, longitude, angle;
 	boolean flying;
 	String icaoFlight, aircraftMdl, company;
 	Date departure, arrival;
@@ -19,9 +19,10 @@ public class Flight {
 	 * @param longitude
 	 * @param flying
 	 * @param aircraftMdl
+	 * @param angle
 	 */
 	public Flight(String icaoFlight, String company, Airport from, Airport to, double latitude, double longitude, boolean flying,
-			String aircraftMdl) {
+			String aircraftMdl, Double angle) {
 		this.icaoFlight = icaoFlight;
 		this.company = company;
 		this.from = from;
@@ -30,6 +31,7 @@ public class Flight {
 		this.longitude = longitude;
 		this.flying = flying;
 		this.aircraftMdl = aircraftMdl;
+		this.angle = angle;
 	}
 
 	/**
@@ -100,6 +102,13 @@ public class Flight {
 	 */
 	public String getCompany() {
 		return company;
+	}
+	
+	/**
+	 * @return the angle
+	 */
+	public Double getAngle() {
+		return angle;
 	}
 	
 	/**

@@ -40,11 +40,12 @@ class ParsedFlight {
 	public String Op;
 	public String Mdl;
 	public String Type;
+	public float Ang;
 	
 	public Flight toFlight(HashMap<String, Airport> airports) {
 //		Airport from = airports.get(this.From.split(" ")[0]);
 //		Airport to = airports.get(this.To.split(" ")[0]);
-		return new Flight(Icao, Op, null, null, Lat, Long, Gnd, Mdl);
+		return new Flight(Icao, Op, null, null, Lat, Long, Gnd, Mdl, 0.0);
 	}
 }
 

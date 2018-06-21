@@ -1,10 +1,12 @@
 package fxflights.gui3D;
 
 import java.net.URL;
+import java.util.Collection;
 
 import com.interactivemesh.jfx.importer.ImportException;
 import com.interactivemesh.jfx.importer.obj.ObjModelImporter;
 
+import fxflights.model.Airport;
 import javafx.geometry.Point3D;
 import javafx.scene.AmbientLight;
 import javafx.scene.Group;
@@ -47,24 +49,24 @@ public class Earth3D{
         root3D.getChildren().add(earth);
         
         // Draw a line
-        Point3D point1 = new Point3D(3, 0, 0);
-        Point3D point2 = new Point3D(2, 1, 0);
-        Cylinder line = createLine(point1, point2);
-        root3D.getChildren().add(line);
+//        Point3D point1 = new Point3D(3, 0, 0);
+//        Point3D point2 = new Point3D(2, 1, 0);
+//        Cylinder line = createLine(point1, point2);
+//        root3D.getChildren().add(line);
         
         // Draw an helix
-        Group helix = new Group();
-        Point3D oldVect = new Point3D(1, 0, 0);
-        for (int i =0; i < 100; i++) {
-        	float t = i / 5.0f;
-        	Point3D newVect = new Point3D(Math.cos(t), t / 5.0f, Math.sin(t));
-        	//draw one small line
-        	Cylinder smallLine = createLine(oldVect, newVect);
-        	helix.getChildren().add(smallLine);
-        	oldVect = newVect;
-        }
-        helix.setTranslateY(2);
-        root3D.getChildren().add(helix);
+//        Group helix = new Group();
+//        Point3D oldVect = new Point3D(1, 0, 0);
+//        for (int i =0; i < 100; i++) {
+//        	float t = i / 5.0f;
+//        	Point3D newVect = new Point3D(Math.cos(t), t / 5.0f, Math.sin(t));
+//        	//draw one small line
+//        	Cylinder smallLine = createLine(oldVect, newVect);
+//        	helix.getChildren().add(smallLine);
+//        	oldVect = newVect;
+//        }
+//        helix.setTranslateY(2);
+//        root3D.getChildren().add(helix);
         
         // Draw city on the earth
 //        displayAirport("Brest", 48.447911, -4.418539, true);
@@ -96,26 +98,27 @@ public class Earth3D{
 
       
     }
-
+    //Display airports from a list
+    public void displayAirportList(Collection<Airport> airportList, Color color) {
+    	for (Airport airport : airportList) {
+    		displayAirport(airport.getName(), airport.getLatitude(), airport.getLongitude(), color);
+    	}
+    }
     
-    //Display Airport function
-    public void displayAirport(String name, double latitude, double longitude, boolean isDeparture) {
+    //Display Airport method
+    public void displayAirport(String name, double latitude, double longitude, Color color) {
     	Group airport = new Group();
     	Point3D point = geoCoordTo3dCoord(latitude, longitude);
-    	Sphere sphere = new Sphere(0.01);
+    	Sphere sphere = new Sphere(0.0025);
     	
     	//Create material
     	final PhongMaterial material = new PhongMaterial();
     	
-    	if (isDeparture) {
-    		material.setDiffuseColor(Color.GREEN);
-        	material.setSpecularColor(Color.GREEN);
-    	}
-    	else {
-    		material.setDiffuseColor(Color.RED);
-        	material.setSpecularColor(Color.RED);
-    	}
-    	
+    	material.setDiffuseColor(color);
+    	material.setSpecularColor(color);
+
+
+    		    	
     	//apply it to the airport
     	sphere.setMaterial(material);
     	
@@ -130,6 +133,12 @@ public class Earth3D{
     	root3D.getChildren().add(airport);
     }
 
+    //Display Flight method
+    public void displayFlight() {
+    	
+    }
+    
+    
     // From Rahel Lüthy : https://netzwerg.ch/blog/2015/03/22/javafx-3d-line/
     public Cylinder createLine(Point3D origin, Point3D target) {
         Point3D yAxis = new Point3D(0, 1, 0);
@@ -160,5 +169,13 @@ public class Earth3D{
                 java.lang.Math.cos(java.lang.Math.toRadians(lon_cor))
                         * java.lang.Math.cos(java.lang.Math.toRadians(lat_cor)));
     }
+
+
+	/**
+	 * @return the root3D
+	 */
+	public Group getRoot3D() {
+		return root3D;
+	}
 
 }
