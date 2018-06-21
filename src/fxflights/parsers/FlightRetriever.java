@@ -23,6 +23,8 @@ class FlightList {
 
 
 class ParsedFlight {
+    static Iterator<Airport> airportIterator = null;
+
 	public String Icao;
 	public String From;
 	public String To;
@@ -34,10 +36,20 @@ class ParsedFlight {
 	public String Op;
 	public String Mdl;
 	public String Type;
-	
+
+
 	public Flight toFlight(HashMap<String, Airport> airports) {
 //		Airport from = airports.get(this.From.split(" ")[0]);
 //		Airport to = airports.get(this.To.split(" ")[0]);
+        Airport from, to;
+        if(airportIterator == null || !airportIterator.hasNext())
+            airportIterator = airports.values().iterator();
+        from = airportIterator.next();
+
+        if(!airportIterator.hasNext())
+            airportIterator = airports.values().iterator();
+        to = airportIterator.next();
+
 		return new Flight(Icao, Op, null, null, Lat, Long, Gnd, Mdl);
 	}
 }
