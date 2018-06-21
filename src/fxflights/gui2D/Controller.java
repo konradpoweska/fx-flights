@@ -124,6 +124,7 @@ public class Controller implements Initializable, FlightsListener {
 
 //		System.out.println("DEBUT DISPLAY 3D");
 		earth3D.resetPlanesGroup();
+		earth3D.resetAirportsGroup();
 		earth3D.displayFlightList(flights);
 
 		ObservableList<Flight> content = FXCollections.observableArrayList();

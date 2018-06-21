@@ -32,6 +32,7 @@ public class Earth3D{
     private static final double TEXTURE_LON_OFFSET = 2.8f;
     private Group root3D;
     private Group planesGroup;
+    private Group airportsGroup;
     private Double airportScale = 0.01;
     private Color aircraftColor = Color.RED;
     private Color departureColor = Color.BLUE;
@@ -43,7 +44,9 @@ public class Earth3D{
         //Create a Pane et graph scene root for the 3D content
         root3D = new Group();
         planesGroup = new Group();
+        airportsGroup = new Group();
         root3D.getChildren().add(planesGroup);
+        root3D.getChildren().add(airportsGroup);
 
         // Load geometry
         ObjModelImporter objImporter = new ObjModelImporter();
@@ -100,7 +103,6 @@ public class Earth3D{
         ambientLight.getScope().addAll(root3D);
         root3D.getChildren().add(ambientLight);
         
-        System.out.println("Avant creation subscene");
         // Create scene
     	SubScene subscene = new SubScene(root3D, 600, 600, true, SceneAntialiasing.BALANCED);
 		subscene.setCamera(camera);
@@ -112,12 +114,12 @@ public class Earth3D{
     //Display airports from a list
     public void displayAirportList(Collection<Airport> airportList, Color color) {
     	for (Airport airport : airportList) {
-    		displayAirport(airport, color);
+    		displayAirport(airport, color, this.airportsGroup);
     	}
     }
     
     //Display Airport method
-    public void displayAirport(Airport airport, Color color) {
+    public void displayAirport(Airport airport, Color color, Group group) {
     	
     	String name = airport.getName();
     	Double latitude = airport.getLatitude();
@@ -147,17 +149,17 @@ public class Earth3D{
     	airportGroup.setTranslateY(point.getY());
     	airportGroup.setTranslateZ(point.getZ());
 //    	System.out.println("BEFORE ADDING GROUP TO ROOT3D");
-    	root3D.getChildren().add(airportGroup);
+    	group.getChildren().add(airportGroup);
     }
 
     //Display list of flights method 
     public void displayFlightList(List<Flight> flights) {
     	for (Flight flight : flights) {
     		if (flight.getFrom()!= null) {
-    			displayAirport(flight.getFrom(), departureColor );
+    			displayAirport(flight.getFrom(), departureColor, this.airportsGroup );
     		}
     		if (flight.getTo() != null) {
-    			displayAirport(flight.getTo(), arrivalColor );
+    			displayAirport(flight.getTo(), arrivalColor, this.airportsGroup );
     		}
     		displayFlight(flight);
     	}
@@ -210,6 +212,10 @@ public class Earth3D{
     public void resetPlanesGroup() {
 		this.planesGroup.getChildren().clear();
 	}
+    
+    public void resetAirportsGroup() {
+    	this.airportsGroup.getChildren().clear();
+    }
 
 
 	/**
