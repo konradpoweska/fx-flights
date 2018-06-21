@@ -37,6 +37,7 @@ public class Controller implements Initializable, FlightsListener {
 	@FXML ChoiceBox<String> toChoiceBox;
 	@FXML ListView<Flight> flightsList;
 	@FXML Button searchButton;
+	@FXML ListView<String> infoList;
 	FlightLive dataBase;
 	Earth3D earth3D;
 
@@ -50,7 +51,13 @@ public class Controller implements Initializable, FlightsListener {
     	flightsList.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			 @Override
 	    	public void handle(MouseEvent event) {
-				 Flight selectedfFlight = flightsList.getSelectionModel().getSelectedItem();
+				 Flight selectedFlight = flightsList.getSelectionModel().getSelectedItem();
+				 
+				 
+					ObservableList<String> content = FXCollections.observableArrayList();
+					selectedFlight.fillInfoList(content);
+					infoList.setItems(content);
+					
 //				 for (Node node : earth3D.getPlanesGroup().getChildren()) {
 //					 if(node) 
 //				 } // Can't link the flight / aircraft to the plane node 
