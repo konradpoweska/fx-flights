@@ -30,6 +30,8 @@ public class Earth3D{
     private static final double TEXTURE_LAT_OFFSET = -0.2f;
     private static final double TEXTURE_LON_OFFSET = 2.8f;
     private Group root3D;
+    private Color aircraftColor = Color.RED;
+
 
     public Earth3D(Pane parent) {
 
@@ -135,15 +137,27 @@ public class Earth3D{
     	root3D.getChildren().add(airport);
     }
 
-//    //Display Flight method
-//    public void displayFlightList(List<Flight> flights) {
-//    	for (Flight flight : flights) {
-//    		displayFlight;
-//    	}
-//    }
+    //Display list of flights method
+    public void displayFlightList(List<Flight> flights) {
+    	for (Flight flight : flights) {
+    		displayFlight(flight);
+    	}
+    }
+    
+    //Display a flight method
+    public void displayFlight(Flight flight) {
+    	Aircraft aircraft = new Aircraft(this.aircraftColor);
+    	aircraft.displayAircraft(flight, this.root3D);
+    }
     
     
-    // From Rahel Lüthy : https://netzwerg.ch/blog/2015/03/22/javafx-3d-line/
+    /**
+	 * @return the aircraftColor
+	 */
+	public Color getAircraftColor() {
+		return aircraftColor;
+	}
+	// From Rahel Lüthy : https://netzwerg.ch/blog/2015/03/22/javafx-3d-line/
     public Cylinder createLine(Point3D origin, Point3D target) {
         Point3D yAxis = new Point3D(0, 1, 0);
         Point3D diff = target.subtract(origin);

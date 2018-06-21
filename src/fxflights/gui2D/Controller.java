@@ -47,12 +47,12 @@ public class Controller implements Initializable, FlightsListener {
     	
 //    	dataBase.displayFlights(dataBase.getFlights());
     	
-    	Flight testFlight = new Flight("394A0D", "Air France", dataBase.getAirports().get("AYGA"), dataBase.getAirports().get("BIHN"), 148.7532958984375, 0.8450319766998291, true, "Avion de test", 45.0);
-    	Flight testFlightBis = new Flight("364A0D", "Air France", dataBase.getAirports().get("AYGA"), dataBase.getAirports().get("BIHN"), 48.7532958984375, 1.8450319766998291, true, "Avion de testBis", 85.0);
-    	Aircraft testAircraft = new Aircraft(Color.GREEN);
-    	Aircraft testAircraftBis = new Aircraft(Color.RED);
-    	testAircraft.displayAircraft(testFlight, earth3D.getRoot3D());
-    	testAircraftBis.displayAircraft(testFlightBis, earth3D.getRoot3D());
+//    	Flight testFlight = new Flight("394A0D", "Air France", dataBase.getAirports().get("AYGA"), dataBase.getAirports().get("BIHN"), 148.7532958984375, 0.8450319766998291, true, "Avion de test", 45.0);
+//    	Flight testFlightBis = new Flight("364A0D", "Air France", dataBase.getAirports().get("AYGA"), dataBase.getAirports().get("BIHN"), 48.7532958984375, 1.8450319766998291, true, "Avion de testBis", 85.0);
+//    	Aircraft testAircraft = new Aircraft(Color.GREEN);
+//    	Aircraft testAircraftBis = new Aircraft(Color.RED);
+//    	testAircraft.displayAircraft(testFlight, earth3D.getRoot3D());
+//    	testAircraftBis.displayAircraft(testFlightBis, earth3D.getRoot3D());
     	
     	searchButton.setOnMouseClicked(event->{
     		searchButton.setDisable(true);

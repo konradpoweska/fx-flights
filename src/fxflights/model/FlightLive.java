@@ -1,6 +1,7 @@
 package fxflights.model;
 import fxflights.parsers.FlightsListener;
 import fxflights.gui3D.Aircraft;
+import fxflights.gui3D.Earth3D;
 import fxflights.parsers.FlightRetriever;
 import fxflights.parsers.parserCSV;
 import javafx.scene.paint.Color;
@@ -95,9 +96,12 @@ public class FlightLive implements FlightsListener {
 
 
 
-	public void onFlightsUpdate(List<Flight> flights) {
+	public void onFlightsUpdate(List<Flight> flights, Earth3D root) {
 		this.flights = flights;
 		System.out.println("Nombre de vols : " + flights.size());
+		displayFlights(flights); // To display it in console
+		root.displayFlightList(flights);
+
 //		for (Flight flight : flights) {
 //			Aircraft testAircraft = new Aircraft(Color.GREEN);
 //			testAircraft.displayAircraft(flight, earth3D.getRoot3D());
