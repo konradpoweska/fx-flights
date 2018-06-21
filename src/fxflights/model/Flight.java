@@ -2,6 +2,8 @@ package fxflights.model;
 
 import java.util.Date;
 
+import javafx.collections.ObservableList;
+
 public class Flight {
 	Airport from, to;
 	double latitude, longitude, angle;
@@ -123,9 +125,21 @@ public class Flight {
 	 */
 	@Override
 	public String toString() {
-		return icaoFlight + ", " + company + " from: " + from + " to: " + to + ". Currently at lat: " + latitude + ", long:" + longitude + ", ang:"+angle;
+
+		return icaoFlight + ", " + company + " from: " + from + " to: " + to + " .";
+
 	}
 	
+	public void fillInfoList(ObservableList<String> content) {
+		content.add("Icao : " + icaoFlight);
+		content.add("Company : " + company);
+		content.add("Model : " + aircraftMdl);
+		content.add("From : " + from);
+		content.add("To : " + to);
+		content.add("Latitude : " + latitude);
+		content.add("Longitude : " + longitude);
+		
+	}
 	
 	
 }

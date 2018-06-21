@@ -22,12 +22,13 @@ public class Aircraft {
 //	private Group root3D;
 	private MeshView[] planeMeshViews;
 	private final Double scale = 0.025;
+	private Flight flight;
 	
-	public Aircraft(Color color) {
+	public Aircraft(Flight flight, Color color) {
 		
 		//Create a scene root for the 3D content
 //		root3D = new Group();
-
+		this.flight = flight;
 		// Load geometry
 		ObjModelImporter planeImporter = new ObjModelImporter();
 		try {
@@ -59,7 +60,7 @@ public class Aircraft {
 //		Fx3DGroup.planeScale.set3DScale(2*scale);
 //	}
 	
-	public void displayAircraft(Flight flight, Group planesGroup) {
+	public void displayAircraft(Group planesGroup) {
 		
 		double latitude = flight.getLatitude();
 		double longitude = flight.getLongitude();

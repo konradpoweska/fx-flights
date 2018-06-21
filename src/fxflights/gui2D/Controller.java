@@ -20,6 +20,7 @@ import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
@@ -37,6 +38,7 @@ public class Controller implements Initializable, FlightsListener {
 	@FXML ComboBox<String> toChoiceBox;
 	@FXML ListView<Flight> flightsList;
 	@FXML Button searchButton;
+	@FXML ListView<String> infoList;
 	FlightLive dataBase;
 	Earth3D earth3D;
 
@@ -51,7 +53,16 @@ public class Controller implements Initializable, FlightsListener {
     	flightsList.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			 @Override
 	    	public void handle(MouseEvent event) {
-				 Flight selectedfFlight = flightsList.getSelectionModel().getSelectedItem();
+				 Flight selectedFlight = flightsList.getSelectionModel().getSelectedItem();
+				 
+				 
+					ObservableList<String> content = FXCollections.observableArrayList();
+					selectedFlight.fillInfoList(content);
+					infoList.setItems(content);
+					
+//				 for (Node node : earth3D.getPlanesGroup().getChildren()) {
+//					 if(node) 
+//				 } // Can't link the flight / aircraft to the plane node 
 				 
 	    	}
 	 });
@@ -111,7 +122,7 @@ public class Controller implements Initializable, FlightsListener {
 		dataBase.displayFlights(flights); // To display it in console
 
 
-		System.out.println("DEBUT DISPLAY 3D");
+//		System.out.println("DEBUT DISPLAY 3D");
 		earth3D.resetPlanesGroup();
 		earth3D.displayFlightList(flights);
 
