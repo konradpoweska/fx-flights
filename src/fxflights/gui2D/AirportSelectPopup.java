@@ -26,7 +26,7 @@ public class AirportSelectPopup {
     Stage dialog;
     Scene dialogScene;
 
-    @FXML TreeView choiceTree;
+    @FXML TreeView<Place> choiceTree;
     @FXML Button okButton;
     @FXML Button cancelButton;
 
@@ -53,8 +53,7 @@ public class AirportSelectPopup {
         // buttons
         cancelButton.setOnAction(event->dialog.close());
         okButton.setOnAction(event->{
-//            callback.onPlaceChosen(((TreeItem<Place>) choiceTree.getSelectionModel().getSelectedItem()).getValue());
-            callback.onPlaceChosen(null);
+            callback.onPlaceChosen(choiceTree.getSelectionModel().getSelectedItem().getValue());
             dialog.close();
             dialog = null;
         });
@@ -94,6 +93,7 @@ public class AirportSelectPopup {
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.setScene(dialogScene);
         dialog.show();
+        this.callback = callback;
     }
 }
 

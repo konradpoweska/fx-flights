@@ -22,6 +22,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -32,8 +33,8 @@ import fxflights.parsers.FlightsListener;
 public class Controller implements Initializable, FlightsListener {
     Stage primaryStage;
 	@FXML Pane pane3D;
-	@FXML ChoiceBox<String> fromChoiceBox;
-	@FXML ChoiceBox<String> toChoiceBox;
+	@FXML ComboBox<String> fromChoiceBox;
+	@FXML ComboBox<String> toChoiceBox;
 	@FXML ListView<Flight> flightsList;
 	@FXML Button searchButton;
 	FlightLive dataBase;
@@ -77,19 +78,19 @@ public class Controller implements Initializable, FlightsListener {
 //    	testAircraftBis.displayAircraft(testFlightBis, earth3D.getRoot3D());
 
 
-		fromChoiceBox.setOnMouseClicked(event->{
-			airportSelectPopup.show(dataBase.flightRetriever.getFrom(), place->{
+		fromChoiceBox.setOnMouseClicked(event->
+			airportSelectPopup.show(dataBase.flightRetriever.getFrom(), place-> {
 				fromChoiceBox.setValue(place.toString());
 				dataBase.flightRetriever.setFrom(place);
-			});
-		});
+			})
+		);
 
-		toChoiceBox.setOnMouseClicked(event->{
-			airportSelectPopup.show(dataBase.flightRetriever.getTo(), place->{
-				toChoiceBox.setValue(place.toString());
-				dataBase.flightRetriever.setTo(place);
-			});
-		});
+		toChoiceBox.setOnMouseClicked(event->
+				airportSelectPopup.show(dataBase.flightRetriever.getTo(), place-> {
+					toChoiceBox.setValue(place.toString());
+					dataBase.flightRetriever.setTo(place);
+				})
+		);
 
     	searchButton.setOnMouseClicked(event->{
     		searchButton.setDisable(true);
