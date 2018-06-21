@@ -5,7 +5,6 @@ import fxflights.model.*;
 import javafx.application.Platform;
 import org.asynchttpclient.*;
 
-import java.io.File;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -98,8 +97,15 @@ public class FlightRetriever {
     }
 
     String generateURL() {
-		StringBuilder result = new StringBuilder("https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json");
-		result.append("?fOpQ=Air%20France");
+	    StringBuilder result = new StringBuilder("https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json?");
+//        result.append("fOpQ=Air%20France");
+        String airportICAO = null;
+        if(from instanceof Airport) airportICAO = ((Airport)from).getIcaoId();
+        else if(to instanceof Airport) airportICAO = ((Airport)to).getIcaoId();
+
+        if(airportICAO!=null) result.append("fAirQ="+airportICAO);
+
+        System.out.println("Request sent: "+result);
 		return result.toString();
 	}
 	
@@ -135,11 +141,23 @@ public class FlightRetriever {
         flights = Arrays.asList(parsingResults.acList).stream()
                 .filter(pf->(pf.From != null && pf.To != null))
                 .map(e->e.toFlight(airports))
+                .filter(f->(placeMatch(from, f.getFrom()) && placeMatch(to, f.getTo())))
                 .collect(Collectors.toList());
 
-		for(FlightsListener listener : flightsListeners) {
-            Platform.runLater(()->{listener.onFlightsUpdate(flights);});
-		}
+
+        Platform.runLater(()->{
+            for(FlightsListener listener : flightsListeners) {
+                listener.onFlightsUpdate(flights);
+            }
+        });
 	}
+
+	static boolean placeMatch(Place p, Airport a) {
+	    if(p==null || a==null) return false;
+        if(p instanceof Airport) return a.equals(p);
+        if(p instanceof City) return a.getCity().equals(p);
+        if(p instanceof Country) return a.getCity().getCountry().equals(p);
+	    return false;
+    }
 
 }
