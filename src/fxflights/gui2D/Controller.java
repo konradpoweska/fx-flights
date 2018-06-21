@@ -13,6 +13,8 @@ import fxflights.gui3D.Earth3D;
 import fxflights.model.Airport;
 import fxflights.model.Flight;
 import fxflights.model.FlightLive;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -76,7 +78,22 @@ public class Controller implements Initializable, FlightsListener {
 		searchButton.setDisable(false);
 		System.out.println("Nombre de vols : " + flights.size());
 		dataBase.displayFlights(flights); // To display it in console
-		earth3D.displayFlightList(flights);
+		
+		Task<Void> task = new Task<Void>() {
+
+			@Override protected Void call() throws Exception {
+
+				Platform.runLater(new Runnable() {
+					@Override public void run() {
+						System.out.println("DEBUT DISPLAY 3D");
+						earth3D.displayFlightList(flights);
+					}
+				});
+				return null;
+			}
+		};
+		task.run();
+		
 		// TODO : afficher dans la flightsList
 	}
 
