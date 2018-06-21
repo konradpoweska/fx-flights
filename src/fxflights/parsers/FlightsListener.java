@@ -1,9 +1,8 @@
 package fxflights.parsers;
 
 import fxflights.model.Flight;
-
-import java.util.ArrayList;
+import java.util.List;
 
 public interface FlightsListener {
-        void onFlightsUpdate(ArrayList<Flight> flights);
+        void onFlightsUpdate(List<Flight> flights);
 }
