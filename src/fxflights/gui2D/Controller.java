@@ -45,6 +45,7 @@ public class Controller implements Initializable, FlightsListener {
     	earth3D = new Earth3D(pane3D);
 		dataBase = new FlightLive();
     	dataBase.flightRetriever.addFlightListener(this);
+		AirportSelectPopup airportSelectPopup = new AirportSelectPopup(primaryStage, dataBase.getCountries().values());
     	
     	flightsList.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			 @Override
@@ -74,9 +75,25 @@ public class Controller implements Initializable, FlightsListener {
 //    	Aircraft testAircraftBis = new Aircraft(Color.RED);
 //    	testAircraft.displayAircraft(testFlight, earth3D.getRoot3D());
 //    	testAircraftBis.displayAircraft(testFlightBis, earth3D.getRoot3D());
-    	
+
+
+		fromChoiceBox.setOnMouseClicked(event->{
+			airportSelectPopup.show(dataBase.flightRetriever.getFrom(), place->{
+				fromChoiceBox.setValue(place.toString());
+				dataBase.flightRetriever.setFrom(place);
+			});
+		});
+
+		toChoiceBox.setOnMouseClicked(event->{
+			airportSelectPopup.show(dataBase.flightRetriever.getTo(), place->{
+				toChoiceBox.setValue(place.toString());
+				dataBase.flightRetriever.setTo(place);
+			});
+		});
+
     	searchButton.setOnMouseClicked(event->{
     		searchButton.setDisable(true);
+    		searchButton.setText("Fetching...");
 			dataBase.flightRetriever.fetchFlights();
 		});
 
@@ -87,35 +104,27 @@ public class Controller implements Initializable, FlightsListener {
     }
 
 	public void onFlightsUpdate(List<Flight> flights) {
-		searchButton.setDisable(false);
+		searchButton.setText("Search");
+    	searchButton.setDisable(false);
 		System.out.println("Nombre de vols : " + flights.size());
 		dataBase.displayFlights(flights); // To display it in console
 
-//		Task<Void> task = new Task<Void>() {
-//
-//			@Override protected Void call() throws Exception {
-//
-//				Platform.runLater(new Runnable() {
-//					@Override public void run() {
-						System.out.println("DEBUT DISPLAY 3D");
-						earth3D.resetPlanesGroup();
-						earth3D.displayFlightList(flights);
-						
-						ObservableList<Flight> content = FXCollections.observableArrayList();
-						for (Flight flight : flights) {
-							content.add(flight);
-						}
-						flightsList.setItems(content);
 
-//					}
-//				});
-//				return null;
-//			}
-//		};
-//		task.run();
+		System.out.println("DEBUT DISPLAY 3D");
+		earth3D.resetPlanesGroup();
+		earth3D.displayFlightList(flights);
+
+		ObservableList<Flight> content = FXCollections.observableArrayList();
+		for (Flight flight : flights) {
+			content.add(flight);
+		}
+		flightsList.setItems(content);
+
+
 		
 		// TODO : afficher dans la flightsList
 	}
+
 
 
 }
