@@ -82,12 +82,12 @@ public class Aircraft {
 				java.lang.Math.toDegrees(java.lang.Math.atan2(position.getX(), position.getZ())),
 				0);
 		
-		plane.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			 @Override
-		    	public void handle(MouseEvent event) {
-				 planeScale.set3DScale(scale*2);
-		    	}
-		 });
+//		plane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//			 @Override
+//		    	public void handle(MouseEvent event) {
+//				 planeScale.set3DScale(scale*2);
+//		    	}
+//		 });
 		
 		planesGroup.getChildren().addAll(plane);
 	}

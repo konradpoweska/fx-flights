@@ -17,11 +17,13 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -32,7 +34,7 @@ public class Controller implements Initializable, FlightsListener {
 	@FXML Pane pane3D;
 	@FXML ChoiceBox<String> fromChoiceBox;
 	@FXML ChoiceBox<String> toChoiceBox;
-	@FXML ListView<String> flightsList;
+	@FXML ListView<Flight> flightsList;
 	@FXML Button searchButton;
 	FlightLive dataBase;
 	Earth3D earth3D;
@@ -43,6 +45,14 @@ public class Controller implements Initializable, FlightsListener {
     	earth3D = new Earth3D(pane3D);
 		dataBase = new FlightLive();
     	dataBase.flightRetriever.addFlightListener(this);
+    	
+    	flightsList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			 @Override
+	    	public void handle(MouseEvent event) {
+				 Flight selectedfFlight = flightsList.getSelectionModel().getSelectedItem();
+				 
+	    	}
+	 });
 
     	//Display every airports
 //    	earth3D.displayAirportList(dataBase.getAirports().values(), Color.YELLOW);
@@ -81,28 +91,28 @@ public class Controller implements Initializable, FlightsListener {
 		System.out.println("Nombre de vols : " + flights.size());
 		dataBase.displayFlights(flights); // To display it in console
 
-		Task<Void> task = new Task<Void>() {
-
-			@Override protected Void call() throws Exception {
-
-				Platform.runLater(new Runnable() {
-					@Override public void run() {
+//		Task<Void> task = new Task<Void>() {
+//
+//			@Override protected Void call() throws Exception {
+//
+//				Platform.runLater(new Runnable() {
+//					@Override public void run() {
 						System.out.println("DEBUT DISPLAY 3D");
 						earth3D.resetPlanesGroup();
 						earth3D.displayFlightList(flights);
 						
-						ObservableList<String> content = FXCollections.observableArrayList();
+						ObservableList<Flight> content = FXCollections.observableArrayList();
 						for (Flight flight : flights) {
-							content.add(flight.toString());
+							content.add(flight);
 						}
 						flightsList.setItems(content);
 
-					}
-				});
-				return null;
-			}
-		};
-		task.run();
+//					}
+//				});
+//				return null;
+//			}
+//		};
+//		task.run();
 		
 		// TODO : afficher dans la flightsList
 	}
