@@ -1,10 +1,7 @@
 package fxflights.parsers;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fxflights.model.Airport;
-import fxflights.model.City;
-import fxflights.model.Country;
-import fxflights.model.Flight;
+import fxflights.model.*;
 import javafx.application.Platform;
 import org.asynchttpclient.*;
 
@@ -63,7 +60,7 @@ public class FlightRetriever {
 	HashMap<String, Airport> airports;
 	FlightList parsingResults;
 	List<Flight> flights;
-	Object from, to;
+	Place from, to;
 	ArrayList<FlightsListener> flightsListeners;
 	
 	
@@ -85,16 +82,22 @@ public class FlightRetriever {
 	public boolean removeFlightListener(FlightsListener fl) {
 		return flightsListeners.remove(fl);
 	}
-	
-	public void setFromTo(Object from, Object to) {
-		this.from = from;
-		this.to = to;
-	}
 
 
+    public Place getFrom() {
+        return from;
+    }
+    public void setFrom(Place from) {
+        this.from = from;
+    }
+    public Place getTo() {
+        return to;
+    }
+    public void setTo(Place to) {
+        this.to = to;
+    }
 
-
-	String generateURL() {
+    String generateURL() {
 		StringBuilder result = new StringBuilder("https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json");
 		result.append("?fOpQ=Air%20France");
 		return result.toString();
