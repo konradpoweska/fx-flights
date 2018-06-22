@@ -5,6 +5,7 @@ import fxflights.model.*;
 import javafx.application.Platform;
 import org.asynchttpclient.*;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -160,4 +161,8 @@ public class FlightRetriever {
 	    return false;
     }
 
+    public void close() {
+		try {client.close();}
+		catch(IOException e) {e.printStackTrace();}
+	}
 }

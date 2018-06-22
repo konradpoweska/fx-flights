@@ -73,6 +73,7 @@ public class Controller implements Initializable, FlightsListener {
 
     void bindPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
+		primaryStage.setOnCloseRequest(event-> dataBase.flightRetriever.close());
     }
 
 	public void onFlightsUpdate(List<Flight> flights) {
