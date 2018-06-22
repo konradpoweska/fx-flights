@@ -1,13 +1,9 @@
 package fxflights.model;
 import fxflights.parsers.FlightsListener;
-import fxflights.gui3D.Aircraft;
-import fxflights.gui3D.Earth3D;
 import fxflights.parsers.FlightRetriever;
 import fxflights.parsers.parserCSV;
-import javafx.scene.paint.Color;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -21,12 +17,12 @@ public class FlightLive implements FlightsListener {
 	
 	public FlightLive() {
 
-		this.countries = new HashMap<String, Country>();
-		this.cities = new HashMap<String, City>();
-		this.airports = new HashMap<String, Airport>(); //keys = icao of airports
+		this.countries = new HashMap<>();
+		this.cities = new HashMap<>();
+		this.airports = new HashMap<>(); //keys = icao of airports
 		parserCSV.parseAirportCSV(new File("airports.csv"), this.countries, this.cities, this.airports );
 		flightRetriever = new FlightRetriever(airports);
-		flightRetriever.addFlightListener(this);
+		flightRetriever.addFlightsListener(this);
 	}
 
 	/**

@@ -1,7 +1,5 @@
 package fxflights.model;
 
-import java.util.Date;
-
 import javafx.collections.ObservableList;
 
 public class Flight {
@@ -9,7 +7,6 @@ public class Flight {
 	double latitude, longitude, angle;
 	boolean flying;
 	String icaoFlight, aircraftMdl, company;
-	Date departure, arrival;
 	
 	
 
@@ -85,20 +82,6 @@ public class Flight {
 		return aircraftMdl;
 	}
 
-	/**
-	 * @return the departure
-	 */
-	public Date getDeparture() {
-		return departure;
-	}
-
-	/**
-	 * @return the arrival
-	 */
-	public Date getArrival() {
-		return arrival;
-	}
-	
 	/**
 	 * @return the arrival
 	 */

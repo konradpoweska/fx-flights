@@ -6,8 +6,8 @@ public class Airport implements Place {
 	City city;
 	String name, icaoId;
 	Double latitude, longitude;
-	ArrayList<Flight> departures;
-	ArrayList<Flight> arrivals;
+//	ArrayList<Flight> departures;
+//	ArrayList<Flight> arrivals;
 	
 	public Airport(City city, String name, String icaoId, Double latitude, Double longitude) {
 	
@@ -16,8 +16,8 @@ public class Airport implements Place {
 		this.icaoId = icaoId;
 		this.latitude = latitude;
 		this.longitude = longitude;
-		this.departures = new ArrayList<Flight>();
-		this.arrivals = new ArrayList<Flight>();
+//		this.departures = new ArrayList<Flight>();
+//		this.arrivals = new ArrayList<Flight>();
 		
 	}
 
@@ -56,19 +56,19 @@ public class Airport implements Place {
 		return longitude;
 	}
 
-	/**
-	 * @return the departures
-	 */
-	public ArrayList<Flight> getDepartures() {
-		return departures;
-	}
-
-	/**
-	 * @return the arrivals
-	 */
-	public ArrayList<Flight> getArrivals() {
-		return arrivals;
-	}
+//	/**
+//	 * @return the departures
+//	 */
+//	public ArrayList<Flight> getDepartures() {
+//		return departures;
+//	}
+//
+//	/**
+//	 * @return the arrivals
+//	 */
+//	public ArrayList<Flight> getArrivals() {
+//		return arrivals;
+//	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

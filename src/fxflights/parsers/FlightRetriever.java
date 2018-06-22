@@ -75,10 +75,10 @@ public class FlightRetriever {
 		Logger.getLogger("io.netty").setLevel(Level.WARNING);
 	}
 
-	public boolean addFlightListener(FlightsListener fl) {
+	public boolean addFlightsListener(FlightsListener fl) {
 		return flightsListeners.add(fl);
 	}
-	public boolean removeFlightListener(FlightsListener fl) {
+	public boolean removeFlightsListener(FlightsListener fl) {
 		return flightsListeners.remove(fl);
 	}
 

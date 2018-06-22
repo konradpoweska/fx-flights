@@ -1,22 +1,16 @@
 package fxflights.gui3D;
 
-import java.net.URL;
-import java.util.List;
-
 import com.interactivemesh.jfx.importer.ImportException;
 import com.interactivemesh.jfx.importer.obj.ObjModelImporter;
-
-//import lib.interactivemesh.jfx.importer.ImportException;
-//import lib.interactivemesh.jfx.importer.obj.ObjModelImporter;
-
 import fxflights.model.Flight;
-import javafx.event.EventHandler;
 import javafx.geometry.Point3D;
 import javafx.scene.Group;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.MeshView;
+
+import java.net.URL;
+
 
 public class Aircraft {
 //	private Group root3D;

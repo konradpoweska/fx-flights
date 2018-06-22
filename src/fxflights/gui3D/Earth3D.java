@@ -12,7 +12,6 @@ import fxflights.model.Flight;
 import javafx.geometry.Point3D;
 import javafx.scene.AmbientLight;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.PointLight;
 import javafx.scene.SceneAntialiasing;
